@@ -208,18 +208,21 @@
                         data['msg'] = 'File upload issues try again!';
                     },
                     success: function(resp){
-                        if(resp == 'ok'){
-                        data['status'] = true;
-                        data['msg'] = 'File upload successfully!';
+                        var resp = JSON.parse(resp);
+                        data['status'] = resp['status'];
+                        data['msg'] = resp['msg']; 
+                        var anivalToastHtml = resp['msg'];
+                        if(resp['status'] == true){
                             jQuery('#'+fileid+' .action a.delete').addClass('disabled scale-transition');
                             jQuery('#'+fileid+' .action a.upload i').text('done');
                             jQuery('#'+fileid+' .action a.upload').attr('onclick','');
                             delete data['selectedFiles'][fileid];
+                            M.toast({html: anivalToastHtml, classes: 'rounded green'});
                             
-                        }else if(resp == 'err'){
-                            data['status'] = false;
-                            data['msg'] = 'Please select a valid file to upload.'
-                        }
+                        }else{M.toast({html: anivalToastHtml, classes: 'rounded red'});}
+                        
+                        
+                        
                     }
                 });
             return;    
