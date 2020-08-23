@@ -97,13 +97,16 @@
                 jQuery.each(data['selectedFiles'], function(id,file){ 
                     uploadFile(id);
                 });
-            }else{alert('Input box unchecked or no files selectedd!');}
+            }else{
+                data['msg'] = 'Input box unchecked or no files selectedd!';
+                M.toast({html: data['msg'], classes: 'rounded red'});messageVoice(data['msg']);
+            }
         }  
         function deleteMultipleFiles(){
             if((Object.keys(data['selectedFiles']).length != 0) && jQuery('#selectForAll').prop("checked") == true ){
                 jQuery(settings.beforeUploadFileListing).html('');
-                console.log('true');
-            }else{alert('Input box unchecked!');}
+                data['msg'] = 'Slect the checkbox';
+            }else{M.toast({html: data['msg'], classes: 'rounded red'});messageVoice(data['msg']);}
         }        
         function removeFile(_this){
             delete data['selectedFiles'][jQuery(_this).closest('tr').attr('id')];
@@ -124,6 +127,7 @@
                     jQuery('#'+uniqid+' td span.error').show().html(data['msg']);
                     jQuery('#'+uniqid+' .action a.upload').addClass('disabled scale-transition');
                     delete data['selectedFiles'][uniqid];
+                    M.toast({html: data['msg'], classes: 'rounded red'});messageVoice(data['msg']);
 
                 }            
         }
@@ -133,7 +137,8 @@
                     jQuery('#'+uniqid+' td span.error').addClass('new red');
                     jQuery('#'+uniqid+' td span.error').show().html(data['msg']);
                     jQuery('#'+uniqid+' .action a.upload').addClass('disabled scale-transition');
-                    delete data['selectedFiles'][uniqid];                     
+                    delete data['selectedFiles'][uniqid];
+                    M.toast({html: data['msg'], classes: 'rounded red'});messageVoice(data['msg']);
                 }else{
                     data['status'] = true;
                     data['msg'] = 'File type is allowed';                   
@@ -162,7 +167,7 @@
                     var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
                     var uniqid = randLetter + Date.now(); 
                     data['selectedFiles'][uniqid] = file;
-                    var thumb = '<img src='+picFile.result+' class="circle responsive-img">';
+                    var thumb = '<img src='+picFile.result+' class="responsive-img">';
                     if((file.type).split('/')[0] != 'image'){
                         thumb = '<i class="material-icons">folder</i>';
                     }
@@ -219,13 +224,17 @@
                             delete data['selectedFiles'][fileid];
                             M.toast({html: anivalToastHtml, classes: 'rounded green'});
                             
-                        }else{M.toast({html: anivalToastHtml, classes: 'rounded red'});}
+                        }else{M.toast({html: anivalToastHtml, classes: 'rounded red'});messageVoice(data['msg'])}
                         
                         
                         
                     }
                 });
             return;    
+        }
+        function messageVoice(string) {
+            var msg = new SpeechSynthesisUtterance(string);
+            window.speechSynthesis.speak(msg);
         }
         /**
          * Start the plugin

@@ -13,7 +13,7 @@ if(!empty($_FILES['file'])){
         if(in_array($fileType, $allowTypes)){ 
             if(move_uploaded_file($_FILES['file']['tmp_name'], $targetFilePath)){ 
                 $data['status'] = true;
-                $data['msg'] = "Successfully uploaded!";
+                $data['msg'] = "Successfully uploaded! ".$fileName ;
             }else{
                 $data['msg'] = 'File moving to folder failed! ';
             } 
