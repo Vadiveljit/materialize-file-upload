@@ -9,7 +9,7 @@ $(document).ready(function(){
     $("#files").anivalFileUpload({ 
         selectOption: "multiple", 
         fileType: ['.jpg','.png'], 
-        fileMaxSize: '1MB', 
+        fileMaxSize: 1, 
         beforeUploadFileListing:'#uploadFilelist', 
         uploadUrl:"inc/upload.php" 
     });   

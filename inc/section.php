@@ -11,7 +11,7 @@
 							<span>Browse</span>
 							<input type="file" id="files" multiple>
 						  </div>
-						  <div class="file-path-wrapper">
+						  <div class="file-path-wrapper" style="opacity:0;">
 							<input class="file-path validate" type="text" placeholder="Upload one or more files">
 						  </div>
 						</div>				
