@@ -50,7 +50,8 @@
         var settings = $.extend({
             selectOption: "multiple",
             fileType:types,
-            fileMaxSize:'2MB'
+            fileMaxSize:1,
+            messageVoice:false
 
         }, options );
 
@@ -233,8 +234,10 @@
             return;    
         }
         function messageVoice(string) {
-            var msg = new SpeechSynthesisUtterance(string);
-            window.speechSynthesis.speak(msg);
+            if(settings.messageVoice == true){
+                var msg = new SpeechSynthesisUtterance(string);
+                window.speechSynthesis.speak(msg);
+            }
         }
         /**
          * Start the plugin

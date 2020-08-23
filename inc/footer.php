@@ -10,8 +10,9 @@ $(document).ready(function(){
         selectOption: "multiple", 
         fileType: ['.jpg','.png'], 
         fileMaxSize: 1, 
+        messageVoice: true, 
         beforeUploadFileListing:'#uploadFilelist', 
-        uploadUrl:"inc/upload.php" 
+        uploadUrl:"inc/upload.php"
     });   
 });
 </script>
